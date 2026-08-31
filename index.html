@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GitShow &amp; CloudVault — Showcase &amp; Git Storage</title>
+  <title>gauconhihi — GitHub Portfolio &amp; Projects</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -24,14 +24,6 @@
               700: '#0155a3',
               800: '#054885',
               900: '#0a3d6f',
-            },
-            pastel: {
-              pink: '#ffedf5',
-              purple: '#f5f0ff',
-              blue: '#eef8ff',
-              green: '#f0fdf4',
-              orange: '#fff7ed',
-              rose: '#ffe4e6'
             }
           },
           borderRadius: {
@@ -42,8 +34,6 @@
           boxShadow: {
             'soft': '0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.025)',
             'soft-lg': '0 20px 40px -10px rgba(12, 135, 235, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04)',
-            'glow': '0 0 25px rgba(56, 189, 248, 0.35)',
-            'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
           }
         }
       }
@@ -52,12 +42,7 @@
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- SweetAlert2 for notifications -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- Canvas Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-
-  <!-- Google Fonts Inter & Plus Jakarta Sans -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -69,10 +54,6 @@
       min-height: 100vh;
       color: #1e293b;
     }
-    .code-font {
-      font-family: 'JetBrains Mono', monospace;
-    }
-    /* Smooth glowing cards */
     .glass-card {
       background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(16px);
@@ -86,775 +67,171 @@
       border-bottom: 1px solid rgba(226, 232, 240, 0.8);
     }
     .hero-gradient {
-      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #f472b6 100%);
+      background: linear-gradient(135deg, #0284c7 0%, #6366f1 50%, #ec4899 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .subtle-gradient {
-      background: linear-gradient(135deg, #0284c7 0%, #6366f1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    /* Custom scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
-      height: 8px;
     }
     ::-webkit-scrollbar-track {
       background: #f1f5f9;
-      border-radius: 9999px;
     }
     ::-webkit-scrollbar-thumb {
       background: #cbd5e1;
       border-radius: 9999px;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
-    }
-    .btn-gradient {
-      background: linear-gradient(135deg, #0284c7 0%, #4f46e5 100%);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .btn-gradient:hover {
-      background: linear-gradient(135deg, #0369a1 0%, #4338ca 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.35);
-    }
-    .btn-gradient-secondary {
-      background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
-    }
-    .btn-gradient-secondary:hover {
-      background: linear-gradient(135deg, #db2777 0%, #7c3aed 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.35);
-    }
-    .badge-pill {
-      border-radius: 9999px;
-    }
-    .animate-float {
-      animation: float 6s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-    .drag-active {
-      border-color: #3b82f6 !important;
-      background-color: #eff6ff !important;
-    }
   </style>
 </head>
-<body class="antialiased selection:bg-brand-100 selection:text-brand-900 pb-16">
+<body class="antialiased selection:bg-brand-100 selection:text-brand-900 pb-20">
 
-  <!-- TOP NAVIGATION BAR -->
+  <!-- TOP HEADER -->
   <header class="sticky top-0 z-50 glass-nav shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
-        <!-- Logo & Branding -->
-        <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('showcase')">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-500 via-indigo-500 to-pink-500 flex items-center justify-center text-white shadow-soft-lg transform hover:rotate-6 transition duration-300">
+        <!-- Logo -->
+        <a href="https://gauconhihi.github.io/" class="flex items-center space-x-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-500 via-indigo-500 to-pink-500 flex items-center justify-center text-white shadow-soft-lg transform hover:scale-105 transition duration-300">
             <i data-lucide="sparkles" class="w-6 h-6"></i>
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <span class="text-xl font-extrabold tracking-tight hero-gradient">GitShow &amp; Vault</span>
-              <span class="px-2.5 py-0.5 text-xs font-semibold bg-brand-100 text-brand-700 rounded-full border border-brand-200">Cloudflare Pages</span>
+              <span class="text-xl font-extrabold tracking-tight hero-gradient">gauconhihi</span>
+              <span class="px-2.5 py-0.5 text-xs font-semibold bg-brand-100 text-brand-700 rounded-full border border-brand-200">GitHub Repositories</span>
             </div>
-            <p class="text-xs text-slate-500 font-medium">Showcase Repos &amp; Cloud File Storage</p>
+            <p class="text-xs text-slate-500 font-medium">Kho dự án &amp; Website trực tuyến</p>
           </div>
-        </div>
+        </a>
 
-        <!-- Navigation Tabs -->
-        <nav class="hidden md:flex items-center space-x-2 bg-slate-100/80 p-1.5 rounded-3xl border border-slate-200/80 shadow-inner">
-          <button id="nav-showcase" onclick="switchTab('showcase')" class="flex items-center space-x-2 px-5 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-200 bg-white text-brand-600 shadow-soft">
-            <i data-lucide="layout-grid" class="w-4 h-4"></i>
-            <span>Showcase Repos</span>
-          </button>
-          <button id="nav-vault" onclick="switchTab('vault')" class="flex items-center space-x-2 px-5 py-2.5 rounded-2xl font-semibold text-sm text-slate-600 hover:text-brand-600 transition-all duration-200">
-            <i data-lucide="folder-git-2" class="w-4 h-4"></i>
-            <span>Git Cloud Vault</span>
-            <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-pink-100 text-pink-600 border border-pink-200">Storage</span>
-          </button>
-          <button id="nav-cloudflare" onclick="switchTab('cloudflare')" class="flex items-center space-x-2 px-5 py-2.5 rounded-2xl font-semibold text-sm text-slate-600 hover:text-brand-600 transition-all duration-200">
-            <i data-lucide="cloud" class="w-4 h-4"></i>
-            <span>Cloudflare Deploy</span>
-          </button>
-          <button id="nav-settings" onclick="switchTab('settings')" class="flex items-center space-x-2 px-4 py-2.5 rounded-2xl font-semibold text-sm text-slate-600 hover:text-brand-600 transition-all duration-200">
-            <i data-lucide="settings" class="w-4 h-4"></i>
-            <span>Cài đặt</span>
-          </button>
-        </nav>
-
-        <!-- User Quick Status / Action -->
+        <!-- Right Quick GitHub Profile Link -->
         <div class="flex items-center space-x-3">
-          <div id="header-user-badge" class="hidden sm:flex items-center space-x-2 bg-white/90 px-3.5 py-2 rounded-2xl border border-slate-200 shadow-sm">
-            <img id="nav-user-avatar" src="https://github.com/gauconhihi.png" alt="Avatar" class="w-7 h-7 rounded-xl object-cover border border-slate-200" onerror="this.src='https://github.com/ghost.png'" />
-            <div class="text-left">
-              <span id="nav-user-name" class="text-xs font-bold text-slate-800 block leading-tight">gauconhihi</span>
-              <span id="nav-auth-status" class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span> Sẵn sàng
-              </span>
-            </div>
-          </div>
-          <button onclick="openTokenModal()" class="flex items-center space-x-1.5 px-3.5 py-2 rounded-2xl bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold border border-slate-200 shadow-sm transition">
-            <i data-lucide="key" class="w-4 h-4 text-amber-500"></i>
-            <span class="hidden sm:inline">Token Git</span>
-          </button>
+          <a href="https://github.com/gauconhihi" target="_blank" class="flex items-center space-x-2 px-4 py-2.5 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs border border-slate-200 shadow-sm transition transform hover:-translate-y-0.5">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span class="hidden sm:inline">github.com/gauconhihi</span>
+          </a>
         </div>
+
       </div>
-    </div>
-    
-    <!-- Mobile Navigation Bar -->
-    <div class="md:hidden flex border-t border-slate-200 bg-white/90 px-2 py-1.5 overflow-x-auto justify-around">
-      <button onclick="switchTab('showcase')" class="mobile-tab-btn flex flex-col items-center py-1 px-3 text-xs font-semibold text-brand-600" data-target="showcase">
-        <i data-lucide="layout-grid" class="w-5 h-5 mb-0.5"></i>
-        <span>Showcase</span>
-      </button>
-      <button onclick="switchTab('vault')" class="mobile-tab-btn flex flex-col items-center py-1 px-3 text-xs font-semibold text-slate-500" data-target="vault">
-        <i data-lucide="folder-git-2" class="w-5 h-5 mb-0.5"></i>
-        <span>Vault</span>
-      </button>
-      <button onclick="switchTab('cloudflare')" class="mobile-tab-btn flex flex-col items-center py-1 px-3 text-xs font-semibold text-slate-500" data-target="cloudflare">
-        <i data-lucide="cloud" class="w-5 h-5 mb-0.5"></i>
-        <span>Cloudflare</span>
-      </button>
-      <button onclick="switchTab('settings')" class="mobile-tab-btn flex flex-col items-center py-1 px-3 text-xs font-semibold text-slate-500" data-target="settings">
-        <i data-lucide="settings" class="w-5 h-5 mb-0.5"></i>
-        <span>Cài đặt</span>
-      </button>
     </div>
   </header>
 
   <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
 
-    <!-- ========================================================================= -->
-    <!-- TAB 1: SHOWCASE REPOSITORIES                                              -->
-    <!-- ========================================================================= -->
-    <section id="tab-showcase" class="space-y-8 animate-fadeIn">
+    <!-- HERO SECTION -->
+    <div class="relative overflow-hidden rounded-4xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white p-8 md:p-12 shadow-soft-lg">
+      <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute right-20 top-0 w-60 h-60 bg-pink-400/20 rounded-full blur-2xl pointer-events-none"></div>
       
-      <!-- HERO BANNER -->
-      <div class="relative overflow-hidden rounded-4xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white p-8 md:p-12 shadow-soft-lg">
-        <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute right-20 top-0 w-60 h-60 bg-pink-400/20 rounded-full blur-2xl pointer-events-none"></div>
-        
-        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div class="space-y-4 text-center md:text-left max-w-2xl">
-            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold border border-white/30">
-              <i data-lucide="globe" class="w-3.5 h-3.5"></i>
-              <span>Cloudflare Pages &amp; GitHub Showcase Hub</span>
+      <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="space-y-4 text-center md:text-left max-w-2xl">
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold border border-white/30">
+            <i data-lucide="folder-git" class="w-3.5 h-3.5"></i>
+            <span>GitHub Repositories Showcase Hub</span>
+          </div>
+          <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
+            Khám phá các Dự Án của <span class="underline decoration-pink-400 underline-offset-8 decoration-4">gauconhihi</span>
+          </h1>
+          <p class="text-blue-100 text-sm md:text-base leading-relaxed">
+            Danh sách toàn bộ các Repository mã nguồn và trang web demo trực tiếp tương ứng theo định dạng <code class="bg-white/20 px-2 py-0.5 rounded font-mono text-white">gauconhihi.github.io/(tên-repo)/</code>.
+          </p>
+          <div class="flex flex-wrap gap-3 pt-2 justify-center md:justify-start">
+            <a href="https://github.com/gauconhihi" target="_blank" class="px-6 py-3.5 rounded-2xl bg-white text-brand-700 font-bold text-sm shadow-md hover:bg-slate-50 transition transform hover:-translate-y-0.5 flex items-center space-x-2">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              <span>Xem trên GitHub</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="glass-card bg-white/95 rounded-3xl p-6 text-slate-800 shadow-soft-lg w-full md:w-80 flex flex-col items-center text-center space-y-4 border border-white">
+          <div class="relative">
+            <img id="profile-avatar" src="https://github.com/gauconhihi.png" alt="gauconhihi" class="w-24 h-24 rounded-3xl object-cover ring-4 ring-brand-100 shadow-md" onerror="this.src='https://github.com/ghost.png'" />
+            <span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white text-[10px]">
+              <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            </span>
+          </div>
+          <div>
+            <h2 class="font-extrabold text-lg text-slate-900">gauconhihi</h2>
+            <a href="https://github.com/gauconhihi" target="_blank" class="text-xs text-brand-600 font-medium hover:underline flex items-center justify-center gap-1 mt-0.5">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> github.com/gauconhihi
+            </a>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 w-full pt-2 border-t border-slate-100 text-center">
+            <div class="bg-slate-50 p-2.5 rounded-2xl">
+              <span id="stat-repo-count" class="text-base font-bold text-slate-800 block">--</span>
+              <span class="text-[10px] text-slate-500 font-medium">Repos</span>
             </div>
-            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
-              Khám phá &amp; Trải nghiệm các Dự Án của <span id="hero-username" class="underline decoration-pink-400 underline-offset-8 decoration-4">gauconhihi</span>
-            </h1>
-            <p class="text-blue-100 text-sm md:text-base leading-relaxed">
-              Toàn bộ Repository công khai &amp; trang demo trực tiếp (Cloudflare Pages / GitHub Pages). Tốc độ cao, không lo gián đoạn mạng, giao diện sang xịn mịn.
-            </p>
-            <div class="flex flex-wrap gap-3 pt-2 justify-center md:justify-start">
-              <button onclick="switchTab('vault')" class="px-6 py-3 rounded-2xl bg-white text-brand-700 font-bold text-sm shadow-md hover:bg-slate-50 transition transform hover:-translate-y-0.5 flex items-center space-x-2">
-                <i data-lucide="hard-drive-upload" class="w-4 h-4 text-brand-600"></i>
-                <span>Mở Git Cloud Vault (Uploader)</span>
-              </button>
-              <button onclick="switchTab('cloudflare')" class="px-6 py-3 rounded-2xl bg-white/20 backdrop-blur-md text-white font-semibold text-sm border border-white/30 hover:bg-white/30 transition flex items-center space-x-2">
-                <i data-lucide="book-open" class="w-4 h-4"></i>
-                <span>Hướng dẫn Cloudflare Domain</span>
-              </button>
+            <div class="bg-slate-50 p-2.5 rounded-2xl">
+              <span id="stat-stars-count" class="text-base font-bold text-amber-600 block">--</span>
+              <span class="text-[10px] text-slate-500 font-medium">Stars</span>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-2xl">
+              <span id="stat-followers-count" class="text-base font-bold text-indigo-600 block">--</span>
+              <span class="text-[10px] text-slate-500 font-medium">Followers</span>
             </div>
           </div>
 
-          <!-- Profile Badge Card -->
-          <div class="glass-card bg-white/95 rounded-3xl p-6 text-slate-800 shadow-soft-lg w-full md:w-80 flex flex-col items-center text-center space-y-4 border border-white">
-            <div class="relative">
-              <img id="profile-card-avatar" src="https://github.com/gauconhihi.png" alt="gauconhihi" class="w-24 h-24 rounded-3xl object-cover ring-4 ring-brand-100 shadow-md" onerror="this.src='https://github.com/ghost.png'" />
-              <span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white text-[10px]">
-                <i data-lucide="check" class="w-3.5 h-3.5"></i>
-              </span>
-            </div>
-            <div>
-              <h2 id="profile-card-name" class="font-extrabold text-lg text-slate-900">gauconhihi</h2>
-              <a id="profile-card-link" href="https://github.com/gauconhihi" target="_blank" class="text-xs text-brand-600 font-medium hover:underline flex items-center justify-center gap-1 mt-0.5">
-                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> github.com/gauconhihi
-              </a>
-            </div>
-
-            <!-- Stats Mini Grid -->
-            <div class="grid grid-cols-3 gap-2 w-full pt-2 border-t border-slate-100 text-center">
-              <div class="bg-slate-50 p-2.5 rounded-2xl">
-                <span id="stat-repo-count" class="text-base font-bold text-slate-800 block">--</span>
-                <span class="text-[10px] text-slate-500 font-medium">Repos</span>
-              </div>
-              <div class="bg-slate-50 p-2.5 rounded-2xl">
-                <span id="stat-stars-count" class="text-base font-bold text-amber-600 block">--</span>
-                <span class="text-[10px] text-slate-500 font-medium">Stars</span>
-              </div>
-              <div class="bg-slate-50 p-2.5 rounded-2xl">
-                <span id="stat-followers-count" class="text-base font-bold text-indigo-600 block">--</span>
-                <span class="text-[10px] text-slate-500 font-medium">Followers</span>
-              </div>
-            </div>
-
-            <button onclick="refreshGitHubData()" class="w-full py-2 px-3 rounded-2xl bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-bold transition flex items-center justify-center space-x-1.5">
-              <i data-lucide="rotate-cw" class="w-3.5 h-3.5" id="refresh-icon"></i>
-              <span>Làm mới dữ liệu</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- FILTER & SEARCH BAR -->
-      <div class="glass-card rounded-3xl p-5 shadow-soft flex flex-col md:flex-row items-center justify-between gap-4 border border-white">
-        <!-- Search Input -->
-        <div class="relative w-full md:w-96">
-          <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
-          <input type="text" id="search-repo-input" oninput="filterRepos()" placeholder="Tìm kiếm tên repo, ngôn ngữ, mô tả..." class="w-full pl-11 pr-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition" />
-        </div>
-
-        <!-- Filter Controls -->
-        <div class="flex flex-wrap items-center gap-2.5 w-full md:w-auto justify-start md:justify-end">
-          <select id="filter-language" onchange="filterRepos()" class="px-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500">
-            <option value="all">Tất cả ngôn ngữ</option>
-          </select>
-          <select id="sort-repos" onchange="filterRepos()" class="px-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500">
-            <option value="updated">Cập nhật mới nhất</option>
-            <option value="stars">Nhiều Sao nhất</option>
-            <option value="name">Tên A-Z</option>
-          </select>
-          <button onclick="promptChangeUser()" class="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center space-x-1.5">
-            <i data-lucide="user-cog" class="w-4 h-4"></i>
-            <span>Đổi User</span>
+          <button onclick="fetchRepositories()" class="w-full py-2 px-3 rounded-2xl bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-bold transition flex items-center justify-center space-x-1.5">
+            <i data-lucide="rotate-cw" class="w-3.5 h-3.5" id="refresh-icon"></i>
+            <span>Làm mới danh sách</span>
           </button>
         </div>
       </div>
+    </div>
 
-      <!-- REPOSITORIES GRID -->
-      <div id="repos-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Skeleton Loader -->
-        <div class="glass-card rounded-3xl p-6 shadow-soft animate-pulse border border-white space-y-4">
-          <div class="h-6 bg-slate-200 rounded-xl w-3/4"></div>
-          <div class="h-4 bg-slate-200 rounded-xl w-full"></div>
-          <div class="h-4 bg-slate-200 rounded-xl w-1/2"></div>
-          <div class="h-10 bg-slate-200 rounded-2xl w-full pt-4"></div>
-        </div>
-        <div class="glass-card rounded-3xl p-6 shadow-soft animate-pulse border border-white space-y-4">
-          <div class="h-6 bg-slate-200 rounded-xl w-3/4"></div>
-          <div class="h-4 bg-slate-200 rounded-xl w-full"></div>
-          <div class="h-4 bg-slate-200 rounded-xl w-1/2"></div>
-          <div class="h-10 bg-slate-200 rounded-2xl w-full pt-4"></div>
-        </div>
-        <div class="glass-card rounded-3xl p-6 shadow-soft animate-pulse border border-white space-y-4">
-          <div class="h-6 bg-slate-200 rounded-xl w-3/4"></div>
-          <div class="h-4 bg-slate-200 rounded-xl w-full"></div>
-          <div class="h-4 bg-slate-200 rounded-xl w-1/2"></div>
-          <div class="h-10 bg-slate-200 rounded-2xl w-full pt-4"></div>
-        </div>
+    <!-- FILTER & SEARCH BAR -->
+    <div class="glass-card rounded-3xl p-5 shadow-soft flex flex-col md:flex-row items-center justify-between gap-4 border border-white">
+      <div class="relative w-full md:w-96">
+        <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+        <input type="text" id="search-repo-input" oninput="filterRepos()" placeholder="Tìm kiếm tên repo, ngôn ngữ, mô tả..." class="w-full pl-11 pr-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition" />
       </div>
 
-      <!-- Empty State / No repos found -->
-      <div id="no-repos-msg" class="hidden glass-card rounded-3xl p-12 text-center shadow-soft border border-white space-y-4">
-        <div class="w-16 h-16 rounded-3xl bg-brand-50 text-brand-500 mx-auto flex items-center justify-center">
-          <i data-lucide="package-search" class="w-8 h-8"></i>
-        </div>
-        <h3 class="text-lg font-bold text-slate-800">Không tìm thấy repository nào</h3>
-        <p class="text-sm text-slate-500 max-w-md mx-auto">Vui lòng kiểm tra lại từ khóa tìm kiếm hoặc nhập Personal Access Token để hiển thị cả Repo Private.</p>
-        <button onclick="openTokenModal()" class="px-5 py-2.5 rounded-2xl btn-gradient text-white text-xs font-bold shadow">
-          Nhập GitHub Token
-        </button>
+      <div class="flex flex-wrap items-center gap-2.5 w-full md:w-auto justify-start md:justify-end">
+        <select id="filter-language" onchange="filterRepos()" class="px-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500">
+          <option value="all">Tất cả ngôn ngữ</option>
+        </select>
+        <select id="sort-repos" onchange="filterRepos()" class="px-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500">
+          <option value="updated">Cập nhật mới nhất</option>
+          <option value="stars">Nhiều Sao nhất</option>
+          <option value="name">Tên A-Z</option>
+        </select>
       </div>
+    </div>
 
-    </section>
-
-    <!-- ========================================================================= -->
-    <!-- TAB 2: GIT CLOUD VAULT (AUTHENTICATION & STORAGE & UPLOADER)              -->
-    <!-- ========================================================================= -->
-    <section id="tab-vault" class="hidden space-y-8 animate-fadeIn">
-
-      <!-- VAULT AUTH SCREEN (If Locked) -->
-      <div id="vault-auth-screen" class="max-w-md mx-auto my-12 glass-card rounded-4xl p-8 sm:p-10 shadow-soft-lg border border-white text-center space-y-6">
-        <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-pink-500 to-indigo-600 text-white flex items-center justify-center mx-auto shadow-soft transform hover:scale-105 transition">
-          <i data-lucide="shield-check" class="w-10 h-10"></i>
-        </div>
-        <div>
-          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Git Private Vault</h2>
-          <p class="text-xs text-slate-500 mt-1">Đăng nhập tài khoản lưu trữ / bảo mật PIN để truy cập uploader không giới hạn</p>
-        </div>
-
-        <!-- Auth Mode Toggle (Login vs Register vs PIN) -->
-        <div class="bg-slate-100 p-1 rounded-2xl flex text-xs font-bold text-slate-600">
-          <button id="auth-mode-login-btn" onclick="setAuthMode('login')" class="flex-1 py-2 rounded-xl bg-white text-slate-900 shadow-sm">Đăng nhập</button>
-          <button id="auth-mode-reg-btn" onclick="setAuthMode('register')" class="flex-1 py-2 rounded-xl text-slate-500 hover:text-slate-900">Đăng ký mới</button>
-        </div>
-
-        <!-- Form Login / Register -->
-        <form id="vault-auth-form" onsubmit="handleVaultAuth(event)" class="space-y-4 text-left">
-          <div id="auth-field-name" class="hidden space-y-1">
-            <label class="text-xs font-bold text-slate-700">Tên hiển thị</label>
-            <div class="relative">
-              <i data-lucide="user" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-              <input type="text" id="auth-input-name" placeholder="Ví dụ: Gấu Con" class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-            </div>
-          </div>
-
-          <div class="space-y-1">
-            <label class="text-xs font-bold text-slate-700">Tên người dùng / Email</label>
-            <div class="relative">
-              <i data-lucide="at-sign" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-              <input type="text" id="auth-input-username" required placeholder="admin hoặc gauconhihi" value="admin" class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-            </div>
-          </div>
-
-          <div class="space-y-1">
-            <label class="text-xs font-bold text-slate-700">Mật khẩu / Mã khóa Vault</label>
-            <div class="relative">
-              <i data-lucide="lock" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-              <input type="password" id="auth-input-password" required placeholder="••••••••" value="123456" class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-            </div>
-          </div>
-
-          <div class="pt-2">
-            <button type="submit" id="auth-submit-btn" class="w-full py-3.5 rounded-2xl btn-gradient text-white font-bold text-sm shadow-soft transition flex items-center justify-center space-x-2">
-              <i data-lucide="unlock" class="w-4 h-4"></i>
-              <span>Mở khóa Cloud Vault</span>
-            </button>
-          </div>
-        </form>
-
-        <div class="p-3 bg-amber-50 rounded-2xl border border-amber-200 text-left flex items-start space-x-2 text-[11px] text-amber-800">
-          <i data-lucide="info" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
-          <div>
-            <p class="font-bold">Mặc định tài khoản thử nghiệm:</p>
-            <p>Username: <code class="font-mono font-semibold">admin</code> / Mật khẩu: <code class="font-mono font-semibold">123456</code> (Hoặc bạn có thể đăng ký tài khoản riêng của mình).</p>
-          </div>
-        </div>
+    <!-- REPOSITORIES GRID -->
+    <div id="repos-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Skeletons -->
+      <div class="glass-card rounded-3xl p-6 shadow-soft animate-pulse border border-white space-y-4">
+        <div class="h-6 bg-slate-200 rounded-xl w-3/4"></div>
+        <div class="h-4 bg-slate-200 rounded-xl w-full"></div>
+        <div class="h-4 bg-slate-200 rounded-xl w-1/2"></div>
       </div>
-
-      <!-- VAULT MAIN DASHBOARD (Unlocked) -->
-      <div id="vault-dashboard" class="hidden space-y-8">
-        
-        <!-- Vault Top Banner & Target Repo Selector -->
-        <div class="glass-card rounded-4xl p-6 md:p-8 shadow-soft border border-white space-y-6">
-          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
-            <div class="flex items-center space-x-4">
-              <div class="w-14 h-14 rounded-3xl bg-gradient-to-tr from-brand-500 to-indigo-600 text-white flex items-center justify-center shadow-soft">
-                <i data-lucide="cloud-lightning" class="w-7 h-7"></i>
-              </div>
-              <div>
-                <div class="flex items-center space-x-2">
-                  <h2 class="text-2xl font-extrabold text-slate-900">Git Cloud Uploader &amp; Storage</h2>
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">Không giới hạn ổ đĩa</span>
-                </div>
-                <p class="text-xs text-slate-500">Lưu trữ tệp tin trực tiếp qua Git REST API — Tải lên, Tải về, Quản lý tệp với toàn quyền.</p>
-              </div>
-            </div>
-
-            <!-- Current Logged In Info & Logout -->
-            <div class="flex items-center space-x-3 bg-slate-50 p-2 pl-4 rounded-2xl border border-slate-200">
-              <div class="text-right">
-                <span id="vault-user-display" class="text-xs font-bold text-slate-800 block">admin</span>
-                <span class="text-[10px] text-slate-500">Đã đăng nhập</span>
-              </div>
-              <button onclick="lockVault()" class="p-2 rounded-xl bg-white hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-slate-200 shadow-sm transition" title="Khóa Vault / Đăng xuất">
-                <i data-lucide="log-out" class="w-4 h-4"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Repo Target & Path Settings -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            
-            <!-- Target Repo Selection -->
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold text-slate-700 flex items-center justify-between">
-                <span>Repository lưu trữ:</span>
-                <button onclick="promptCreateRepo()" class="text-brand-600 hover:underline text-[11px] font-semibold flex items-center gap-1">
-                  <i data-lucide="plus-circle" class="w-3 h-3"></i> Tạo repo mới
-                </button>
-              </label>
-              <div class="relative">
-                <select id="vault-target-repo" onchange="onVaultRepoChange()" class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
-                  <option value="filevault">gauconhihi/filevault (Kho lưu trữ)</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Branch Selection -->
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold text-slate-700">Nhánh Git (Branch):</label>
-              <div class="relative">
-                <input type="text" id="vault-target-branch" value="main" placeholder="main" class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500" />
-              </div>
-            </div>
-
-            <!-- Folder Path -->
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold text-slate-700">Thư mục con (Folder Path):</label>
-              <div class="relative flex items-center">
-                <input type="text" id="vault-current-path" value="uploads" placeholder="Ví dụ: uploads hoặc photos/2026" class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500" />
-                <button onclick="loadVaultFiles()" class="absolute right-2 px-3 py-1.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold shadow-sm transition">
-                  Duyệt
-                </button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- UPLOADER ZONE -->
-        <div class="glass-card rounded-4xl p-8 shadow-soft border border-white space-y-6">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <div class="w-8 h-8 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center">
-                <i data-lucide="upload-cloud" class="w-4 h-4"></i>
-              </div>
-              <h3 class="text-lg font-bold text-slate-900">Kéo thả tệp tin hoặc chọn từ máy tính</h3>
-            </div>
-            <span class="text-xs text-slate-500">Tự động đẩy commit vào Repo GitHub</span>
-          </div>
-
-          <!-- Drag and Drop Area -->
-          <div id="drop-zone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleFileDrop(event)" onclick="document.getElementById('file-input').click()" class="border-2 border-dashed border-slate-300 hover:border-brand-500 bg-slate-50/70 hover:bg-brand-50/40 rounded-3xl p-10 text-center cursor-pointer transition-all duration-200 space-y-4">
-            <input type="file" id="file-input" multiple onchange="handleFileSelect(event)" class="hidden" />
-            
-            <div class="w-16 h-16 rounded-3xl bg-white shadow-soft mx-auto flex items-center justify-center text-brand-500 animate-bounce">
-              <i data-lucide="upload-cloud" class="w-8 h-8"></i>
-            </div>
-            <div>
-              <p class="text-base font-bold text-slate-800">Nhấp để chọn tệp hoặc kéo thả tệp vào đây</p>
-              <p class="text-xs text-slate-500 mt-1">Hỗ trợ tệp hình ảnh, video, tài liệu, file nén (.zip), mã nguồn không giới hạn.</p>
-            </div>
-            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-2xl bg-white border border-slate-200 text-xs font-bold text-slate-700 shadow-sm">
-              <i data-lucide="file-plus" class="w-4 h-4 text-brand-500"></i>
-              <span>Chọn nhiều tệp cùng lúc</span>
-            </div>
-          </div>
-
-          <!-- Selected Files Queue & Upload Progress -->
-          <div id="upload-queue-container" class="hidden space-y-4 bg-slate-50 p-5 rounded-3xl border border-slate-200">
-            <div class="flex items-center justify-between">
-              <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-600">Danh sách tệp chờ tải lên (<span id="queue-count">0</span>)</h4>
-              <button onclick="clearUploadQueue()" class="text-rose-600 hover:underline text-xs font-semibold">Xóa danh sách</button>
-            </div>
-
-            <div id="upload-queue-list" class="space-y-2 max-h-60 overflow-y-auto pr-1"></div>
-
-            <div class="pt-2 flex flex-col sm:flex-row gap-3 items-center justify-between">
-              <div class="w-full sm:w-1/2">
-                <input type="text" id="upload-commit-msg" placeholder="Ghi chú Commit (Mặc định: Upload via GitVault)" class="w-full px-4 py-2.5 rounded-2xl bg-white border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500" />
-              </div>
-              <button onclick="startUploadQueue()" id="start-upload-btn" class="w-full sm:w-auto px-6 py-3 rounded-2xl btn-gradient text-white font-bold text-xs shadow transition flex items-center justify-center space-x-2">
-                <i data-lucide="send" class="w-4 h-4"></i>
-                <span>Bắt đầu tải lên Repo GitHub</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- REPO FILE BROWSER & MANAGER -->
-        <div class="glass-card rounded-4xl p-6 md:p-8 shadow-soft border border-white space-y-6">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
-                  <i data-lucide="files" class="w-4 h-4"></i>
-                </div>
-                <h3 class="text-lg font-bold text-slate-900">Danh sách tệp trong Repo</h3>
-              </div>
-              <p class="text-xs text-slate-500 mt-0.5">Xem trước, tải trực tiếp, sao chép liên kết hoặc xóa tệp</p>
-            </div>
-
-            <div class="flex items-center space-x-2">
-              <button onclick="loadVaultFiles()" class="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center space-x-1.5">
-                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-                <span>Tải lại danh sách</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Breadcrumb navigation -->
-          <div class="flex items-center space-x-2 bg-slate-50 px-4 py-2.5 rounded-2xl text-xs font-semibold text-slate-600 border border-slate-200 overflow-x-auto">
-            <i data-lucide="home" class="w-3.5 h-3.5 text-brand-500 shrink-0"></i>
-            <span id="vault-breadcrumb" class="font-mono text-slate-800">gauconhihi/filevault/uploads</span>
-          </div>
-
-          <!-- File List Table -->
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-              <thead>
-                <tr class="border-b border-slate-200 text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
-                  <th class="pb-3 pl-4">Tên tệp tin</th>
-                  <th class="pb-3">Kích thước</th>
-                  <th class="pb-3">Loại</th>
-                  <th class="pb-3 text-right pr-4">Hành động</th>
-                </tr>
-              </thead>
-              <tbody id="vault-file-table-body" class="text-xs divide-y divide-slate-100">
-                <!-- Dynamic Content -->
-                <tr>
-                  <td colspan="4" class="py-8 text-center text-slate-400">
-                    <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto text-brand-500 mb-2"></i>
-                    Đang tải danh sách tệp từ Git API...
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-
+      <div class="glass-card rounded-3xl p-6 shadow-soft animate-pulse border border-white space-y-4">
+        <div class="h-6 bg-slate-200 rounded-xl w-3/4"></div>
+        <div class="h-4 bg-slate-200 rounded-xl w-full"></div>
+        <div class="h-4 bg-slate-200 rounded-xl w-1/2"></div>
       </div>
-
-    </section>
-
-    <!-- ========================================================================= -->
-    <!-- TAB 3: CLOUDFLARE PAGES & CUSTOM DOMAIN GUIDE                            -->
-    <!-- ========================================================================= -->
-    <section id="tab-cloudflare" class="hidden space-y-8 animate-fadeIn">
-      
-      <div class="glass-card rounded-4xl p-8 md:p-12 shadow-soft border border-white space-y-8">
-        
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-slate-100">
-          <div class="space-y-2">
-            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-bold border border-orange-200">
-              <i data-lucide="zap" class="w-3.5 h-3.5"></i>
-              <span>Cloudflare Pages + Custom Domain</span>
-            </div>
-            <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Hướng Dẫn Triển Khai Web &amp; Tên Miền Riêng</h2>
-            <p class="text-sm text-slate-600 leading-relaxed">
-              Dùng Cloudflare Pages thay thế cho GitHub Pages giúp web không bao giờ sập, CDN toàn cầu tốc độ cực nhanh, miễn phí 100% SSL &amp; Băng thông.
-            </p>
-          </div>
-          
-          <a href="https://dash.cloudflare.com" target="_blank" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold text-xs shadow-soft hover:shadow-lg transition transform hover:-translate-y-0.5 flex items-center space-x-2 shrink-0">
-            <i data-lucide="external-link" class="w-4 h-4"></i>
-            <span>Mở Cloudflare Dashboard</span>
-          </a>
-        </div>
-
-        <!-- 4 Step Visual Workflow -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
-          <!-- STEP 1 -->
-          <div class="bg-gradient-to-br from-white to-orange-50/50 p-6 rounded-3xl border border-orange-100 shadow-sm space-y-4 hover:shadow-md transition">
-            <div class="flex items-center space-x-3">
-              <div class="w-10 h-10 rounded-2xl bg-orange-500 text-white font-extrabold flex items-center justify-center shadow-sm">1</div>
-              <div>
-                <h3 class="font-bold text-slate-900 text-base">Đẩy mã nguồn lên GitHub</h3>
-                <span class="text-xs text-orange-600 font-semibold">Tạo Repo Public hoặc Private</span>
-              </div>
-            </div>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Bạn tạo 1 repo mới trên GitHub (ví dụ: <code class="font-mono bg-orange-100/70 px-2 py-0.5 rounded text-orange-800 font-bold">gauconhihi/my-portfolio</code>) và đẩy toàn bộ thư mục web này lên.
-            </p>
-            <div class="bg-slate-900 text-slate-100 p-3.5 rounded-2xl text-[11px] code-font overflow-x-auto space-y-1">
-              <p class="text-slate-400"># Các lệnh đẩy lên Git:</p>
-              <p>git init</p>
-              <p>git add .</p>
-              <p>git commit -m "Initial commit"</p>
-              <p>git remote add origin https://github.com/gauconhihi/my-portfolio.git</p>
-              <p>git push -u origin main</p>
-            </div>
-          </div>
-
-          <!-- STEP 2 -->
-          <div class="bg-gradient-to-br from-white to-blue-50/50 p-6 rounded-3xl border border-blue-100 shadow-sm space-y-4 hover:shadow-md transition">
-            <div class="flex items-center space-x-3">
-              <div class="w-10 h-10 rounded-2xl bg-blue-600 text-white font-extrabold flex items-center justify-center shadow-sm">2</div>
-              <div>
-                <h3 class="font-bold text-slate-900 text-base">Liên kết Cloudflare Pages</h3>
-                <span class="text-xs text-blue-600 font-semibold">Workers &amp; Pages &gt; Create application</span>
-              </div>
-            </div>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Truy cập <b>dash.cloudflare.com</b> &gt; Vào mục <b>Workers &amp; Pages</b> &gt; Bấm nút <b>Create application</b> &gt; Chọn tab <b>Pages</b> &gt; <b>Connect to Git</b>.
-            </p>
-            <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
-              <li>Chọn tài khoản GitHub <code class="font-mono font-bold text-blue-700">gauconhihi</code>.</li>
-              <li>Chọn repository web vừa tạo.</li>
-              <li>Build command: <span class="font-mono bg-blue-100 px-1.5 py-0.5 rounded text-blue-800">Để trống</span> (Vì web thuần HTML/JS).</li>
-              <li>Build output directory: <span class="font-mono bg-blue-100 px-1.5 py-0.5 rounded text-blue-800">/ (hoặc để trống)</span>.</li>
-              <li>Bấm <b>Save and Deploy</b>.</li>
-            </ul>
-          </div>
-
-          <!-- STEP 3 -->
-          <div class="bg-gradient-to-br from-white to-purple-50/50 p-6 rounded-3xl border border-purple-100 shadow-sm space-y-4 hover:shadow-md transition">
-            <div class="flex items-center space-x-3">
-              <div class="w-10 h-10 rounded-2xl bg-purple-600 text-white font-extrabold flex items-center justify-center shadow-sm">3</div>
-              <div>
-                <h3 class="font-bold text-slate-900 text-base">Gắn Tên Miền Riêng (Custom Domain)</h3>
-                <span class="text-xs text-purple-600 font-semibold">Custom Domains tab trong Cloudflare Pages</span>
-              </div>
-            </div>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Sau khi deploy thành công:
-            </p>
-            <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
-              <li>Trong trang project Pages, chuyển sang tab <b>Custom domains</b>.</li>
-              <li>Bấm <b>Set up a custom domain</b>.</li>
-              <li>Nhập tên miền của bạn (ví dụ: <code class="font-mono font-bold text-purple-700">gauconhihi.com</code> hoặc <code class="font-mono font-bold text-purple-700">app.gauconhihi.com</code>).</li>
-              <li>Cloudflare sẽ tự động trỏ DNS và cấp phát chứng chỉ SSL/HTTPS miễn phí 100%.</li>
-            </ul>
-          </div>
-
-          <!-- STEP 4 -->
-          <div class="bg-gradient-to-br from-white to-emerald-50/50 p-6 rounded-3xl border border-emerald-100 shadow-sm space-y-4 hover:shadow-md transition">
-            <div class="flex items-center space-x-3">
-              <div class="w-10 h-10 rounded-2xl bg-emerald-600 text-white font-extrabold flex items-center justify-center shadow-sm">4</div>
-              <div>
-                <h3 class="font-bold text-slate-900 text-base">Thêm thành viên / Quản trị viên</h3>
-                <span class="text-xs text-emerald-600 font-semibold">Cấp quyền tài khoản Cloudflare an toàn</span>
-              </div>
-            </div>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Nếu bạn muốn mời người khác cùng quản lý Cloudflare:
-            </p>
-            <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
-              <li>Vào <b>Manage Account</b> &gt; <b>Members</b>.</li>
-              <li>Bấm <b>Invite members</b>.</li>
-              <li>Nhập email người cần mời và chọn quyền hạn (ví dụ: Administrator hoặc Cloudflare Pages Admin).</li>
-              <li>Người được mời chấp nhận qua email là xong.</li>
-            </ul>
-          </div>
-
-        </div>
-
-        <!-- Compare Table -->
-        <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 space-y-3">
-          <h4 class="font-extrabold text-sm text-slate-800 flex items-center gap-2">
-            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i>
-            Vì sao Cloudflare Pages tốt hơn GitHub Pages?
-          </h4>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-600">
-            <div class="bg-white p-4 rounded-2xl border border-slate-200">
-              <span class="font-bold text-slate-800 block mb-1 text-sm">⚡ Tốc độ &amp; Ổn định</span>
-              Không bao giờ bị nghẽn mạng do mạng VN chặn, có CDN máy chủ tại Hà Nội &amp; TP.HCM.
-            </div>
-            <div class="bg-white p-4 rounded-2xl border border-slate-200">
-              <span class="font-bold text-slate-800 block mb-1 text-sm">🔒 Custom Domain Tự Động</span>
-              Hỗ trợ SSL cực nhanh, DNS Anycast chống DDoS, không sợ chết web khi lượng truy cập lớn.
-            </div>
-            <div class="bg-white p-4 rounded-2xl border border-slate-200">
-              <span class="font-bold text-slate-800 block mb-1 text-sm">📁 Unlimited Private Repos</span>
-              Kết nối trực tiếp cả repo riêng tư miễn phí, bảo mật mã nguồn tối đa.
-            </div>
-          </div>
-        </div>
-
+      <div class="glass-card rounded-3xl p-6 shadow-soft animate-pulse border border-white space-y-4">
+        <div class="h-6 bg-slate-200 rounded-xl w-3/4"></div>
+        <div class="h-4 bg-slate-200 rounded-xl w-full"></div>
+        <div class="h-4 bg-slate-200 rounded-xl w-1/2"></div>
       </div>
+    </div>
 
-    </section>
-
-    <!-- ========================================================================= -->
-    <!-- TAB 4: SETTINGS & GITHUB API CONFIG                                      -->
-    <!-- ========================================================================= -->
-    <section id="tab-settings" class="hidden space-y-8 animate-fadeIn">
-      <div class="max-w-2xl mx-auto glass-card rounded-4xl p-8 shadow-soft border border-white space-y-6">
-        
-        <div class="flex items-center space-x-3 pb-4 border-b border-slate-100">
-          <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center">
-            <i data-lucide="sliders" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <h2 class="text-xl font-extrabold text-slate-900">Cấu hình GitHub &amp; Giao diện</h2>
-            <p class="text-xs text-slate-500">Tùy chỉnh tài khoản mặc định và Personal Access Token</p>
-          </div>
-        </div>
-
-        <div class="space-y-4">
-          
-          <!-- GitHub Username -->
-          <div class="space-y-1.5">
-            <label class="text-xs font-bold text-slate-700">Tên người dùng GitHub mặc định</label>
-            <input type="text" id="setting-username" value="gauconhihi" class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500" />
-            <p class="text-[11px] text-slate-400">Dùng để tải danh sách các Repo và trang GitHub Pages / Cloudflare tương ứng.</p>
-          </div>
-
-          <!-- GitHub Personal Access Token -->
-          <div class="space-y-1.5">
-            <label class="text-xs font-bold text-slate-700 flex items-center justify-between">
-              <span>GitHub Personal Access Token (PAT)</span>
-              <a href="https://github.com/settings/tokens/new?scopes=repo,read:user,user:email" target="_blank" class="text-brand-600 hover:underline text-[11px] font-semibold flex items-center gap-1">
-                <i data-lucide="key-round" class="w-3 h-3"></i> Tạo Token trên GitHub
-              </a>
-            </label>
-            <input type="password" id="setting-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxx" class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500" />
-            <p class="text-[11px] text-slate-400">Cần thiết để tải lên file vào repo riêng tư (Git Vault Uploader) và tăng giới hạn API rate limit lên 5000 request/giờ.</p>
-          </div>
-
-            <!-- Custom Domain Base -->
-          <div class="space-y-1.5">
-            <label class="text-xs font-bold text-slate-700">Domain URL Mặc Định</label>
-            <input type="text" id="setting-custom-domain" value="https://gauconhihi.github.io" placeholder="https://gauconhihi.github.io" class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500" />
-            <p class="text-[11px] text-slate-400">Các nút "Xem Web" sẽ tự động trỏ đến https://gauconhihi.github.io/&lt;tên-repo&gt;/.</p>
-          </div>
-
-          <!-- Save Button -->
-          <div class="pt-4 flex items-center justify-between">
-            <button onclick="saveSettings()" class="px-6 py-3 rounded-2xl btn-gradient text-white text-xs font-bold shadow-soft flex items-center space-x-2">
-              <i data-lucide="save" class="w-4 h-4"></i>
-              <span>Lưu cấu hình</span>
-            </button>
-
-            <button onclick="resetSettings()" class="px-4 py-3 rounded-2xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold transition">
-              Đặt lại mặc định
-            </button>
-          </div>
-
-        </div>
-
+    <!-- Empty State -->
+    <div id="no-repos-msg" class="hidden glass-card rounded-3xl p-12 text-center shadow-soft border border-white space-y-4">
+      <div class="w-16 h-16 rounded-3xl bg-brand-50 text-brand-500 mx-auto flex items-center justify-center">
+        <i data-lucide="package-search" class="w-8 h-8"></i>
       </div>
-    </section>
+      <h3 class="text-lg font-bold text-slate-800">Không tìm thấy repository nào</h3>
+      <p class="text-sm text-slate-500 max-w-md mx-auto">Vui lòng kiểm tra lại từ khóa tìm kiếm.</p>
+    </div>
 
   </main>
 
-  <!-- ========================================================================= -->
-  <!-- MODAL: GITHUB TOKEN PROMPT                                                -->
-  <!-- ========================================================================= -->
-  <div id="token-modal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="glass-card bg-white rounded-4xl max-w-md w-full p-6 sm:p-8 shadow-soft-lg border border-white space-y-6 animate-scaleUp">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center">
-            <i data-lucide="key" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 class="font-extrabold text-slate-900 text-base">Cấu hình GitHub Token</h3>
-            <p class="text-xs text-slate-500">Mở khóa uploader &amp; truy cập kho lưu trữ</p>
-          </div>
-        </div>
-        <button onclick="closeTokenModal()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-xl">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <div class="space-y-4 text-xs">
-        <p class="text-slate-600 leading-relaxed">
-          Nhập GitHub Personal Access Token (classic hoặc fine-grained) với quyền <code class="font-mono bg-slate-100 px-1 py-0.5 rounded text-brand-700 font-bold">repo</code> để cho phép uploader tải file trực tiếp lên kho chứa của bạn.
-        </p>
-
-        <div class="space-y-1.5">
-          <label class="font-bold text-slate-700">Token:</label>
-          <input type="password" id="modal-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxx" class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500" />
-        </div>
-
-        <div class="p-3 bg-blue-50 rounded-2xl border border-blue-200 text-blue-800 space-y-1">
-          <p class="font-bold flex items-center gap-1"><i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Bảo mật:</p>
-          <p>Token chỉ được lưu cục bộ trong LocalStorage trình duyệt của bạn, không bao giờ gửi đến bất kỳ máy chủ bên thứ ba nào.</p>
-        </div>
-      </div>
-
-      <div class="flex items-center space-x-3 pt-2">
-        <button onclick="saveModalToken()" class="flex-1 py-3 rounded-2xl btn-gradient text-white font-bold text-xs shadow-soft">
-          Lưu Token
-        </button>
-        <button onclick="closeTokenModal()" class="px-5 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs">
-          Đóng
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- JAVASCRIPT LOGIC -->
   <script src="./app.js"></script>
 </body>
 </html>
