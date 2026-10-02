@@ -420,9 +420,18 @@ ui.openModel = () => {
   $('#f-model-q').focus();
 };
 
+// Errors must render inside the dialog; the log sits behind the modal and is unreadable.
+function vaultMsg(text, isErr = false, isOk = false) {
+  const n = $('#v-msg');
+  n.textContent = text;
+  n.className = 'note' + (isErr ? ' err' : '') + (isOk ? ' info' : '');
+}
+
 ui.openVault = (pid) => {
   const d = $('#d-vault'); soleOpen(d);
   vaultFocus = pid;
+  $('#v-pass').value = '';
+  vaultMsg('');
   renderVaultState();
   d.showModal();
   $('#v-pass').focus();
@@ -662,17 +671,43 @@ function wire() {
 
   $('#v-ok').onclick = async () => {
     const pass = $('#v-pass').value;
-    if (!HAS_CRYPTO) return sysLine('trình duyệt không có WebCrypto');
-    const creating = !vault.exists;
-    if (!(await vault.unlock(pass))) return sysLine('❌ passphrase sai');
-    if (creating) sysLine(`✔ vault đã tạo. Keys: ${vault.listKeys().length}`);
-    const k = $('#f-key').value.trim();
-    if (vaultFocus && k) { vault.setKey(vaultFocus, k); $('#f-key').value = ''; sysLine(`🔑 key đã lưu cho **${vaultFocus}**`); }
-    renderVaultState(); renderProvList(); refreshChrome();
+    if (!pass) return vaultMsg('nhập mật khẩu trước', true);
+    if (!HAS_CRYPTO) return vaultMsg('trình duyệt không có WebCrypto — không mã hoá được', true);
+    $('#v-ok').disabled = true;
+    vaultMsg('đang mở…');
+    try {
+      const creating = !vault.exists;
+      if (!(await vault.unlock(pass))) return vaultMsg('❌ mật khẩu sai', true);
+      vaultMsg(creating ? '✔ vault đã tạo' : '✔ đã mở', false, true);
+      if (creating) sysLine(`✔ vault đã tạo. Keys: ${vault.listKeys().length}`);
+      const k = $('#f-key').value.trim();
+      if (vaultFocus && k) { vault.setKey(vaultFocus, k); $('#f-key').value = ''; sysLine(`🔑 key đã lưu cho **${vaultFocus}**`); }
+      renderVaultState(); renderProvList(); refreshChrome();
+      $('#v-pass').value = '';
+      setTimeout(() => { const d = $('#d-vault'); if (d.open) d.close(); }, 500);
+    } finally {
+      $('#v-ok').disabled = false;
+    }
   };
-  $('#v-lock').onclick = () => { vault.lock(); renderVaultState(); renderProvList(); refreshChrome(); };
+  $('#v-lock').onclick = () => {
+    vault.lock();
+    renderVaultState(); renderProvList(); refreshChrome();
+    const d = $('#d-vault');
+    if (d.open) d.close();
+    sysLine('vault đã khoá.');
+  };
 
   document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => b.closest('dialog').close());
+  // Clicking outside the sheet should dismiss it; <dialog> does this natively nowhere.
+  document.querySelectorAll('dialog').forEach(d => {
+    d.addEventListener('click', (e) => {
+      if (e.target !== d) return;            // clicks inside the sheet
+      const r = d.getBoundingClientRect();
+      const inside = e.clientX >= r.left && e.clientX <= r.right &&
+                     e.clientY >= r.top && e.clientY <= r.bottom;
+      if (!inside) d.close();
+    });
+  });
   $('#thinking-toggle').onclick = () => {
     const last = [...document.querySelectorAll('#log .frame.think')].at(-1);
     if (last) last.open = !last.open;

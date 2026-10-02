@@ -110,7 +110,7 @@
 </dialog>
 
 <dialog id="d-vault" class="sheet narrow">
-  <header><h3>Key vault</h3><button class="ib x" data-close>✕</button></header>
+  <header><h3>Key vault</h3><button class="ib x" data-close title="đóng (Esc)">✕</button></header>
   <div class="sheet-body">
     <div class="callout">
       <b>Ô này là <i>passphrase</i> của bạn — KHÔNG phải API key.</b><br>
@@ -119,6 +119,7 @@
     </div>
     <p class="note">AES-GCM 256 · khoá PBKDF2-SHA256 310k vòng. Quên passphrase = mất vĩnh viễn key, không khôi phục được.</p>
     <input id="v-pass" type="password" placeholder="mật khẩu bạn tự nghĩ ra" autocomplete="new-password">
+    <div id="v-msg" class="note"></div>
     <div class="acts">
       <button id="v-ok" class="btn primary">mở / tạo</button>
       <button id="v-lock" class="btn">khoá</button>
