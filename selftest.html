@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>self-test — gauconhihi</title>
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body style="display:block; padding:20px">
+<h1>self-test</h1>
+<pre id="out"></pre>
+<script type="module">
+// runs in-page; asserts core invariants. no framework.
+import { Vault, HAS_CRYPTO } from './js/vault.js';
+import { contextWindow, isMillion, chatUrl, authHeaders, KINDS, PRESETS } from './js/providers.js';
+import { estTokens, normalizeUsage } from './js/api.js';
+import { COMMANDS, parse } from './js/commands.js';
+
+let pass = 0, fail = 0;
+const out = document.getElementById('out');
+function ok(name, cond) {
+  if (cond) { pass++; out.textContent += `PASS  ${name}\n`; }
+  else { fail++; out.textContent += `FAIL  ${name}\n`; }
+}
+
+// fake localStorage so vault tests don't clobber real data
+function memStore() {
+  const m = new Map();
+  return {
+    getItem: k => m.has(k) ? m.get(k) : null,
+    setItem: (k, v) => m.set(k, String(v)),
+    removeItem: k => m.delete(k),
+    dump: () => JSON.stringify([...m.entries()]),
+  };
+}
+
+ok('WebCrypto available', HAS_CRYPTO);
+
+// vault
+const ms = memStore();
+const v = new Vault(ms);
+ok('vault starts empty', !v.exists && !v.unlocked);
+await v.create('correct horse battery staple');
+ok('vault created', v.exists && v.unlocked);
+v.setKey('openai', 'sk-test-123');
+ok('key stored', v.getKey('openai') === 'sk-test-123');
+ok('key NOT in plaintext storage', !ms.dump().includes('sk-test-123'));
+ok('ciphertext actually written', ms.dump().includes('ct'));
+const blob = v.exportBlob();
+ok('export blob has no plaintext key', !blob.includes('sk-test-123'));
+v.lock();
+ok('lock clears access', !v.unlocked && v.getKey('openai') === '');
+ok('wrong passphrase rejected', (await v.unlock('wrong')) === false);
+ok('right passphrase works', (await v.unlock('correct horse battery staple')) === true);
+ok('key survives lock/unlock', v.getKey('openai') === 'sk-test-123');
+
+// context windows
+ok('1M: gemini', isMillion('gemini-2.5-flash'));
+ok('1M: gemini pro', contextWindow('gemini-2.5-pro') === 1048576);
+ok('1M: claude sonnet', contextWindow('claude-sonnet-4-5') === 1000000);
+ok('1M: space-bunny', contextWindow('xkiro/stealth/space-bunny-alpha:free') === 1000000);
+ok('200k: deepseek', contextWindow('deepseek-chat') === 200000);
+ok('unknown -> 128k default', contextWindow('some-weird-model') === 128000);
+
+// urls + headers
+const oai = { id: 'openai', base: 'https://api.openai.com/v1/', kind: 'openai' };
+ok('openai chat url', chatUrl(oai) === 'https://api.openai.com/v1/chat/completions');
+ok('openai auth header', authHeaders(oai, 'k').authorization === 'Bearer k');
+const ant = { id: 'anthropic', base: 'https://api.anthropic.com', kind: 'anthropic' };
+ok('anthropic chat url', chatUrl(ant) === 'https://api.anthropic.com/v1/messages');
+const ah = authHeaders(ant, 'k');
+ok('anthropic x-api-key', ah['x-api-key'] === 'k');
+ok('anthropic version header', ah['anthropic-version'] === '2023-06-01');
+ok('anthropic browser CORS header', ah['anthropic-dangerous-direct-browser-access'] === 'true');
+const gg = { id: 'google', base: 'https://generativelanguage.googleapis.com/v1beta', kind: 'google' };
+ok('google chat url has model in path',
+   chatUrl(gg, 'gemini-2.5-flash') === 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent');
+ok('google api key header', authHeaders(gg, 'k')['x-goog-api-key'] === 'k');
+
+// presets
+ok('presets unique ids', new Set(PRESETS.map(p => p.id)).size === PRESETS.length);
+ok('all preset kinds valid', PRESETS.every(p => KINDS[p.kind]));
+
+// tokens
+ok('estTokens latin', estTokens('hello world this is a test') > 3);
+ok('estTokens cjk denser', estTokens('你好世界你好世界') >= 4);
+ok('normalizeUsage google', normalizeUsage(gg, { promptTokenCount: 5, candidatesTokenCount: 7 }).out === 7);
+ok('normalizeUsage openai', normalizeUsage(oai, { prompt_tokens: 5, completion_tokens: 7 }).out === 7);
+
+// commands
+ok('parse /help', parse('/help')?.cmd === COMMANDS.help);
+ok('parse alias /m', parse('/m')?.cmd === COMMANDS.model);
+ok('parse with arg', parse('/new my chat').arg === 'my chat');
+ok('unknown command flagged', parse('/zzz').cmd === null);
+ok('non-command returns null', parse('hello') === null);
+
+// summary
+out.textContent += `\n${fail === 0 ? '✅ ALL PASS' : '❌ FAILURES'} — ${pass} pass, ${fail} fail\n`;
+out.dataset.result = fail === 0 ? 'pass' : 'fail';
+</script>
+</body>
+</html>

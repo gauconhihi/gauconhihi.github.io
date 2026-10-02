@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gauconhihi — AI CLI</title>
+<meta name="description" content="Multi-provider AI CLI in the browser. OpenAI / Anthropic / Gemini / any OpenAI-compatible endpoint.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>⚡</text></svg>">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+
+<div id="shell">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside id="side">
+    <div class="side-head">
+      <div class="logo">gauconhihi</div>
+      <button id="newchat" class="ib" title="chat mới (/new)">＋</button>
+    </div>
+
+    <button id="sb-provider" class="side-btn">
+      <span class="dot" id="prov-dot"></span>
+      <span class="grow" id="prov-label">chọn provider</span>
+      <span class="chev">›</span>
+    </button>
+    <button id="sb-model" class="side-btn">
+      <span class="grow" id="model-label">chọn model</span>
+      <span class="chev">›</span>
+    </button>
+
+    <div class="side-sec">sessions</div>
+    <div id="sessions" class="sessions"></div>
+
+    <div class="side-foot">
+      <button id="sb-keys" class="side-mini"><span id="vault-dot" class="dot"></span><span id="vault-label">keys</span></button>
+      <button id="sb-theme" class="side-mini" title="theme">◐</button>
+      <button id="sb-help" class="side-mini" title="help">?</button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main id="main">
+    <header id="top">
+      <div class="crumb"><span id="top-title">chat</span></div>
+      <div class="grow"></div>
+      <span id="ctx-badge" class="badge" title="ngân sách context">ctx</span>
+      <button id="btn-stop" class="ib stop" hidden>■ dừng</button>
+    </header>
+
+    <div id="log"></div>
+
+    <footer id="foot">
+      <div id="thinking" hidden>
+        <span class="spin"></span><span id="thinking-txt">đang suy nghĩ…</span>
+        <button id="thinking-toggle" class="mini">xem ▾</button>
+      </div>
+      <div id="hint"></div>
+      <div class="composer">
+        <textarea id="in" rows="1" placeholder="gõ lệnh /help, hoặc Enter để chat…" spellcheck="false"></textarea>
+        <button id="btn-send" class="ib primary" title="gửi">➤</button>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<!-- ============ DIALOGS ============ -->
+<dialog id="d-prov" class="sheet">
+  <header><h3>Providers</h3><button class="ib x" data-close>✕</button></header>
+  <div class="sheet-body">
+    <div class="field">
+      <label>Tên</label>
+      <input id="f-name" placeholder="OpenRouter, hay tên tuỳ ý">
+    </div>
+    <div class="field">
+      <label>Base URL</label>
+      <input id="f-url" placeholder="https://api.openai.com/v1">
+    </div>
+    <div class="field">
+      <label>Loại API</label>
+      <select id="f-kind">
+        <option value="openai">OpenAI-compatible · /chat/completions</option>
+        <option value="openai-responses">OpenAI Responses · /responses</option>
+        <option value="anthropic">Anthropic · /v1/messages</option>
+        <option value="google">Google Gemini · :generateContent</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>API key <span class="hint">mã hoá, chỉ lưu trong máy bạn</span></label>
+      <input id="f-key" type="password" placeholder="bỏ trống nếu không cần" autocomplete="off">
+    </div>
+    <div class="acts">
+      <button id="f-load" class="btn">tự load models</button>
+      <button id="f-save" class="btn primary">lưu & dùng</button>
+    </div>
+    <hr>
+    <div id="prov-list" class="plist"></div>
+  </div>
+</dialog>
+
+<dialog id="d-model" class="sheet">
+  <header><h3>Models</h3><button class="ib x" data-close>✕</button></header>
+  <div class="sheet-body">
+    <div class="keyrow">
+      <input id="f-model-q" class="search" placeholder="lọc model…">
+      <span id="model-count" class="count"></span>
+    </div>
+    <div id="model-list" class="plist"></div>
+  </div>
+</dialog>
+
+<dialog id="d-vault" class="sheet narrow">
+  <header><h3>Key vault</h3><button class="ib x" data-close>✕</button></header>
+  <div class="sheet-body">
+    <p class="note">AES-GCM 256 · khoá PBKDF2-SHA256 310k vòng. Passphrase không lưu, không gửi đi. Quên = mất key.</p>
+    <input id="v-pass" type="password" placeholder="passphrase" autocomplete="new-password">
+    <div class="acts">
+      <button id="v-ok" class="btn primary">mở / tạo</button>
+      <button id="v-lock" class="btn">khoá</button>
+    </div>
+    <div id="v-state" class="note"></div>
+  </div>
+</dialog>
+
+<dialog id="d-cmd" class="sheet">
+  <header><h3>Lệnh</h3><button class="ib x" data-close>✕</button></header>
+  <div class="sheet-body" id="cmd-list"></div>
+</dialog>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
