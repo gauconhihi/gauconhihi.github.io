@@ -112,13 +112,25 @@
 <dialog id="d-vault" class="sheet narrow">
   <header><h3>Key vault</h3><button class="ib x" data-close>✕</button></header>
   <div class="sheet-body">
-    <p class="note">AES-GCM 256 · khoá PBKDF2-SHA256 310k vòng. Passphrase không lưu, không gửi đi. Quên = mất key.</p>
-    <input id="v-pass" type="password" placeholder="passphrase" autocomplete="new-password">
+    <div class="callout">
+      <b>Ô này là <i>passphrase</i> của bạn — KHÔNG phải API key.</b><br>
+      Bạn tự chọn 1 mật khẩu, dùng để <b>khoá</b> các API key trong máy.
+      Nó không gửi đi đâu cả, và cũng không phải key của OpenAI/Anthropic…
+    </div>
+    <p class="note">AES-GCM 256 · khoá PBKDF2-SHA256 310k vòng. Quên passphrase = mất vĩnh viễn key, không khôi phục được.</p>
+    <input id="v-pass" type="password" placeholder="mật khẩu bạn tự nghĩ ra" autocomplete="new-password">
     <div class="acts">
       <button id="v-ok" class="btn primary">mở / tạo</button>
       <button id="v-lock" class="btn">khoá</button>
     </div>
     <div id="v-state" class="note"></div>
+    <div id="v-list" class="plist"></div>
+    <hr>
+    <div class="callout alt">
+      <b>Nhập API key ở đâu?</b><br>
+      → <code>/provider</code> (nút <b>chọn provider</b> ở thanh bên trái), ô <b>API key</b>.<br>
+      Ô <i>đó</i> mới là key thật của nhà cung cấp, và sẽ được mã hoá bằng passphrase ở đây.
+    </div>
   </div>
 </dialog>
 

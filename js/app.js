@@ -352,7 +352,7 @@ function refreshChrome() {
   $('#model-label').textContent = m ? m.id : 'chọn model';
   $('#top-title').textContent = store.curChat().title;
   $('#prov-dot').className = 'dot' + (p ? (vault.getKey(p.id) || !P.needsKey(p) ? ' on' : ' off') : '');
-  $('#vault-label').textContent = vault.unlocked ? 'keys ✓' : 'keys';
+  $('#vault-label').textContent = vault.unlocked ? 'khoá ✓' : 'khoá';
   $('#vault-dot').className = 'dot' + (vault.unlocked ? ' on' : '');
 
   const info = m, used = estContextTokens();
@@ -509,10 +509,26 @@ function renderModelList() {
 function renderVaultState() {
   const p = state.providers.find(x => x.id === vaultFocus);
   const t = !HAS_CRYPTO ? 'Trình duyệt không có WebCrypto — không mã hoá được, key sẽ không lưu.'
-    : !vault.exists ? 'Chưa có vault. Nhập passphrase → tạo mới.'
-    : vault.unlocked ? `✔ đang mở · ${vault.listKeys().length} key` + (p ? ` · ${p.name}` : '')
+    : !vault.exists ? 'Chưa có vault. Nhập mật khẩu → tạo mới.'
+    : vault.unlocked ? `✔ Đang mở · ${vault.listKeys().length} key đã lưu` + (p ? ` · đang chỉnh: ${p.name}` : '')
     : 'Vault tồn tại, đang khoá.';
-  $('#v-state').textContent = t;
+  const box = $('#v-state');
+  box.textContent = t;
+
+  // show exactly which providers hold a key so nothing is ambiguous
+  let list = $('#v-list');
+  if (!list) return;
+  list.textContent = '';
+  if (!vault.unlocked) return;
+  const have = vault.listKeys();
+  if (!have.length) {
+    list.appendChild(el('div', 'empty', 'chưa lưu key nào — nhập ở /provider'));
+    return;
+  }
+  for (const id of have) {
+    const pr = state.providers.find(x => x.id === id);
+    list.appendChild(el('div', 'item', `${pr?.name || id} · đã mã hoá`));
+  }
 }
 
 // ===================== provider ops =====================
